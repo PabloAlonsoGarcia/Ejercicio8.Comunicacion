@@ -8,7 +8,7 @@ class Personaje() {
 
 
     fun creacionPersonaje(){
-        //TODO Al terminar el ejercicio automatizarlo
+        //Al terminar el ejercicio automatizarlo
         val posibilidadesEv = listOf<String>("Adolescente","Adulto","Anciano")
         val posibilidadesRa = listOf<String>("Elfo","Humano","Enano","Goblin")
         val posibilidadesCl = listOf<String>("Mago","Ladron","Guerrero","Berserker")
@@ -31,7 +31,7 @@ class Personaje() {
     fun comprobarGrito(mensaje:String): String{
         var mensajeA:String = mensaje
 
-//TODO comletar la funcion con las comprobaciones de los mensajes.
+//comletar la funcion con las comprobaciones de los mensajes.
         if(mensaje.equals(mensaje.uppercase()) && mensaje.contains("?")){
             mensajeA="preguntaGrito"
         }else{
@@ -61,7 +61,7 @@ class Personaje() {
 
             when(this.estadoVital){
                 "Adolescente" -> when(mensaje){
-                    //TODO Implementar el contro de todos los mensajes en la funcion externa
+                    //Implementar el contro de todos los mensajes en la funcion externa
                                     "¿Como estas?" -> println("De lujo")
                                     "¿como estas?" -> println("De lujo")
                                     "grito" -> println("Eh relajate")
@@ -73,11 +73,11 @@ class Personaje() {
                 }
                 "Adulto" -> when(mensaje){
 
-                                //TODO Terminar las respuestas de adulto
+                                //Terminar las respuestas de adulto
                                 }
                 "Anciano" -> when(mensaje){
 
-                                //TODO Terminar las respuestas de anciano
+                                //Terminar las respuestas de anciano
                                 }
             }
 
