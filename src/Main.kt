@@ -31,7 +31,7 @@ class Personaje() {
     fun comprobarGrito(mensaje:String): String{
         var mensajeA:String = mensaje
 
-//TODO comletar la funcion con las comprobaciones de los mensajes
+//TODO comletar la funcion con las comprobaciones de los mensajes.
         if(mensaje.equals(mensaje.uppercase()) && mensaje.contains("?")){
             mensajeA="preguntaGrito"
         }else{
