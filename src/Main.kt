@@ -27,21 +27,58 @@ class Personaje() {
         this.clase=claseR
     }
 
-    fun comunicacion(personaje: Personaje){
+    fun comprobarGrito(mensaje:String): String{
+        var mensajeA:String = mensaje
+
+
+        if(mensaje.equals(mensaje.uppercase()) && mensaje.contains("?")){
+            mensajeA="preguntaGrito"
+        }else{
+            if(mensaje.equals(mensaje.uppercase()))
+            mensajeA="grito"
+        }
+
+        return mensajeA
+    }
+
+
+    fun comunicacion(){
         var respuesta:String =""
         var mensaje:String=""
 
         println("¿Hablamos con el un rato?")
         respuesta= readln()
 
-        while(respuesta=="si" || respuesta=="Si"){
+        if(respuesta=="si" || respuesta=="Si")
             println("Dale,hablemos con el")
 
-            mensaje=readln().lowercase()
+        while(respuesta=="si" || respuesta=="Si"){
+
+
+
+            mensaje=readln()
+
+            mensaje=comprobarGrito(mensaje)
+
+
 
             when(this.estadoVital){
+                "Adolescente" -> when(mensaje){
+                                    "¿Como estas?" -> println("De lujo")
+                                    "¿como estas?" -> println("De lujo")
+                                    "grito" -> println("Eh relajate")
+                                    "preguntaGrito" ->println("Tranqui se lo que hago")
+                                    this.nombre -> println("¿Que pasa?")
+                                    ""
 
+                                    else -> { println("Yo que se") }
+                }
+                "Adulto" -> when(mensaje){
 
+                                }
+                "Anciano" -> when(mensaje){
+
+                                }
 
 
             }
@@ -66,6 +103,9 @@ fun main() {
     println("Acutalmente es un: " + p1.estadoVital)
     println("Pertenece a la raza: "+ p1.raza)
     println("Y es un: "+p1.clase)
+    println()
+
+    p1.comunicacion()
 
 
 
