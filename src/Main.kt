@@ -6,9 +6,7 @@ class Personaje() {
     var raza: String = ""
     var clase: String =""
 
-
-    fun creacionPersonaje(){
-        //Al terminar el ejercicio automatizarlo
+    init {
         val posibilidadesEv = listOf<String>("Adolescente","Adulto","Anciano")
         val posibilidadesRa = listOf<String>("Elfo","Humano","Enano","Goblin")
         val posibilidadesCl = listOf<String>("Mago","Ladron","Guerrero","Berserker")
@@ -43,6 +41,10 @@ class Personaje() {
                 else
                     if(mensaje.equals(this.nombre))
                         mensajeA="nombre"
+                else{
+                    if(mensaje.equals("adiós") || mensaje.equals("Adiós") || mensaje.equals("adios") || mensaje.equals("Adios"))
+                        mensajeA="adios"
+                }
             }
         }
 
@@ -61,7 +63,7 @@ class Personaje() {
         respuesta= readln()
 
         if(respuesta=="si" || respuesta=="Si")
-            println("Dale,hablemos con el")
+            println("Dale hablemos con el, cuando te canses dile adios y ya")
 
         while(respuesta=="si" || respuesta=="Si"){
 
@@ -70,12 +72,13 @@ class Personaje() {
 
 
             when(this.estadoVital){
+                //Respuestas a los distintos mensajes (mensajes controlados en fun comprobarMensaje)
                 "Adolescente" -> when(mensaje){
-                    //Implementar el control de todos los mensajes en la funcion externa
                                     "¿como estas?" -> println("De lujo")
                                     "grito" -> println("Eh relajate")
                                     "preguntaGrito" ->println("Tranqui se lo que hago")
                                     "nombre"-> println("¿Que pasa?")
+                                    "adios" -> respuesta="no"
 
                                     else -> { println("Yo que se") }
                 }
@@ -84,20 +87,22 @@ class Personaje() {
                                     "grito" -> println( "No me levantes la voz mequetrefe")
                                     "preguntaGrito" ->println("Estoy buscando la mejor solución")
                                     "nombre"-> println("¿Necesitas algo?")
+                                    "adios" -> respuesta="no"
 
                                     else -> { println("No sé de qué me estás hablando") }
 
-                                //Terminar las respuestas de adulto
+
                                 }
                 "Anciano" -> when(mensaje){
                                     "¿como estas?" -> println("No me puedo mover")
                                     "grito" -> println("Háblame más alto que no te escucho")
                                     "preguntaGrito" ->println("Que no te escucho!")
                                     "nombre"-> println("Las 5 de la tarde")
+                                    "adios" -> respuesta="no"
 
                                     else -> { println("En mis tiempos esto no pasaba") }
 
-                                //Terminar las respuestas de anciano
+
                                 }
             }
 
@@ -107,17 +112,68 @@ class Personaje() {
 }
 
 
+
 fun main() {
-    val p1 = Personaje()
-    var respuesta:String = ""
-    var mensaje:String =""
-    p1.creacionPersonaje()
+    var numPersonajes = 0
+    var respuesta: String = ""
+    val personajes = mutableListOf<Personaje>()
+    var cont:Int=0
+    var respuestaN=""
 
-    println("Nuestro personaje se llama: "+p1.nombre)
-    println("Acutalmente es un: " + p1.estadoVital)
-    println("Pertenece a la raza: "+ p1.raza)
-    println("Y es un: "+p1.clase)
-    println()
 
-    p1.comunicacion()
+    println("¿Cuantos personajes quieres crear?")
+    numPersonajes = readln().toInt()
+
+
+
+    while (numPersonajes <= 0) {
+        print("Si no hay personajes no podrás hablar con ellos")
+        numPersonajes = readln().toInt()
+    }
+
+    println("Perfecto,¿quieres que se creen automáticamente o introduces tu los datos a mano?")
+    respuesta = readln()
+
+    if (respuesta.equals("automáticamente") || respuesta.equals("Automáticamente") || respuesta.equals("automaticamente") || respuesta.equals(
+            "Automaticamente")){
+        println("Hecho")
+        repeat(numPersonajes) {
+            personajes.add(Personaje())
+        }
+    }else{
+        repeat(numPersonajes) {
+            personajes.add(Personaje())
+        }
+        println("Okey,pues introduce los datos:")
+        personajes.forEach{
+            cont=1
+            println("Personaje"+ cont)
+            println("Nombre:")
+            it.nombre= readln()
+            println("Estado Vital:")
+            it.estadoVital= readln()
+            println("Raza: ")
+            it.raza= readln()
+            println("Clase: ")
+            it.clase=readln()
+            cont++
+        }
+    }
+
+
+
+    personajes.forEach {
+        println("Nuestro personaje se llama: "+it.nombre)
+        println("Acutalmente es un: " + it.estadoVital)
+        println("Pertenece a la raza: "+ it.raza)
+        println("Y es un: "+it.clase)
+        println()
+    }
+
+    println("Hora de hablar con ellos")
+    println("¿Con quien quieres hablar?,dime su nombre:")
+    respuestaN= readln()
+
+
+
 }
