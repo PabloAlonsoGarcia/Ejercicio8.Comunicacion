@@ -28,16 +28,26 @@ class Personaje() {
         this.clase=claseR
     }
 
-    fun comprobarGrito(mensaje:String): String{
+    fun comprobarMensaje(mensaje:String): String{
         var mensajeA:String = mensaje
 
 //comletar la funcion con las comprobaciones de los mensajes.
         if(mensaje.equals(mensaje.uppercase()) && mensaje.contains("?")){
             mensajeA="preguntaGrito"
         }else{
-            if(mensaje.equals(mensaje.uppercase()))
-            mensajeA="grito"
+            if(mensaje.equals(mensaje.uppercase())){
+            mensajeA="grito"}
+            else{
+                if(mensaje.equals("¿Como estas?") || mensaje.equals("¿como estas?") || mensaje.equals("¿Cómo estás?") ||mensaje.equals("¿cómo estás?") )
+                    mensajeA="¿como estas?"
+                else
+                    if(mensaje.equals(this.nombre))
+                        mensajeA="nombre"
+            }
         }
+
+
+
 
         return mensajeA
     }
@@ -56,26 +66,36 @@ class Personaje() {
         while(respuesta=="si" || respuesta=="Si"){
 
             mensaje=readln()
-            mensaje=comprobarGrito(mensaje)
+            mensaje=comprobarMensaje(mensaje)
 
 
             when(this.estadoVital){
                 "Adolescente" -> when(mensaje){
-                    //Implementar el contro de todos los mensajes en la funcion externa
-                                    "¿Como estas?" -> println("De lujo")
+                    //Implementar el control de todos los mensajes en la funcion externa
                                     "¿como estas?" -> println("De lujo")
                                     "grito" -> println("Eh relajate")
                                     "preguntaGrito" ->println("Tranqui se lo que hago")
-                                    this.nombre -> println("¿Que pasa?")
-
+                                    "nombre"-> println("¿Que pasa?")
 
                                     else -> { println("Yo que se") }
                 }
                 "Adulto" -> when(mensaje){
+                                    "¿como estas?" -> println("En la flor de la vida, pero me empieza a doler la espalda")
+                                    "grito" -> println( "No me levantes la voz mequetrefe")
+                                    "preguntaGrito" ->println("Estoy buscando la mejor solución")
+                                    "nombre"-> println("¿Necesitas algo?")
+
+                                    else -> { println("No sé de qué me estás hablando") }
 
                                 //Terminar las respuestas de adulto
                                 }
                 "Anciano" -> when(mensaje){
+                                    "¿como estas?" -> println("No me puedo mover")
+                                    "grito" -> println("Háblame más alto que no te escucho")
+                                    "preguntaGrito" ->println("Que no te escucho!")
+                                    "nombre"-> println("Las 5 de la tarde")
+
+                                    else -> { println("En mis tiempos esto no pasaba") }
 
                                 //Terminar las respuestas de anciano
                                 }
