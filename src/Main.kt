@@ -10,6 +10,11 @@ class Personaje() {
         val posibilidadesEv = listOf<String>("Adolescente","Adulto","Anciano")
         val posibilidadesRa = listOf<String>("Elfo","Humano","Enano","Goblin")
         val posibilidadesCl = listOf<String>("Mago","Ladron","Guerrero","Berserker")
+        val nombres = arrayOf("Jack","John","Jorge","Juan","Javier")
+
+        nombre = nombres[Random.nextInt(0,5)]
+
+
 
 
         var rI1 = Random.nextInt(posibilidadesEv.size)
@@ -53,11 +58,34 @@ class Personaje() {
 
         return mensajeA
     }
+    fun cifrarCadenaCesar(cadena: String): String{
+
+        var abecedario="abcdefghijklmnñopqrstuvwxyz"
+        var cadenaCifrada = ""
+        val clave = 13
+        cadena.forEach {
+            if(it.isLetter()){
+                if(abecedario.indexOf(it)+clave<27){
+                    cadenaCifrada += abecedario[abecedario.indexOf(it)+clave]
+                }else{
+                    if (abecedario.indexOf(it)+clave>=27){
+                        cadenaCifrada += abecedario[(abecedario.indexOf(it)+clave)-27]
+                    }
+                }
+            }
+        }
+        return cadenaCifrada
+
+
+
+    }
 
 
     fun comunicacion(){
         var respuesta:String =""
         var mensaje:String=""
+        var cadena: String=""
+        val abecedario= "abcdefghijklmnñopqrstuvwxyz"
 
         println("¿Hablamos con el un rato?")
         respuesta= readln()
@@ -65,45 +93,192 @@ class Personaje() {
         if(respuesta=="si" || respuesta=="Si")
             println("Dale hablemos con el, cuando te canses dile adios y ya")
 
-        while(respuesta=="si" || respuesta=="Si"){
+        while(respuesta=="si" || respuesta=="Si") {
 
-            mensaje=readln()
-            mensaje=comprobarMensaje(mensaje)
+            mensaje = readln()
+            mensaje = comprobarMensaje(mensaje)
+
+            when(this.raza){
+                "Elfo"-> when (this.estadoVital) {
+                    //Respuestas a los distintos mensajes (mensajes controlados en fun comprobarMensaje)
+                    "Adolescente" -> when (mensaje) {
+                        "¿como estas?" -> {
+                                            cadena="De lujo"
+                                            println(cifrarCadenaCesar(cadena))
+
+                        }
+                        "grito" -> {
+                            cadena="Eh relajate"
+                            println(cifrarCadenaCesar(cadena))
+
+                        }
+                        "preguntaGrito" ->{
+                            cadena="Tranqui se lo que hago"
+                            println(cifrarCadenaCesar(cadena))
+
+                        }
+                        "nombre" -> {
+                            cadena="¿Que pasa?"
+                            println(cifrarCadenaCesar(cadena))
+
+                        }
+                        "adios" -> {
+                            cadena="Adios"
+                            println(cifrarCadenaCesar(cadena))
+                            respuesta = "no"
+                        }
+
+                        else -> {
+
+                            cadena="Yo que se"
+                            println(cifrarCadenaCesar(cadena))
+                        }
+                    }
+
+                    "Adulto" -> when (mensaje) {
+                        "¿como estas?" -> println("En la flor de la vida, pero me empieza a doler la espalda")
+                        "grito" -> println("No me levantes la voz mequetrefe")
+                        "preguntaGrito" -> println("Estoy buscando la mejor solución")
+                        "nombre" -> println("¿Necesitas algo?")
+                        "adios" -> {
+                            println("Adios")
+                            respuesta = "no"
+                        }
+
+                        else -> {
+                            println("No sé de qué me estás hablando")
+                        }
 
 
-            when(this.estadoVital){
-                //Respuestas a los distintos mensajes (mensajes controlados en fun comprobarMensaje)
-                "Adolescente" -> when(mensaje){
-                                    "¿como estas?" -> println("De lujo")
-                                    "grito" -> println("Eh relajate")
-                                    "preguntaGrito" ->println("Tranqui se lo que hago")
-                                    "nombre"-> println("¿Que pasa?")
-                                    "adios" -> respuesta="no"
+                    }
 
-                                    else -> { println("Yo que se") }
+                    "Anciano" -> when (mensaje) {
+                        "¿como estas?" -> println("No me puedo mover")
+                        "grito" -> println("Háblame más alto que no te escucho")
+                        "preguntaGrito" -> println("Que no te escucho!")
+                        "nombre" -> println("Las 5 de la tarde")
+                        "adios" -> {
+                            println("Adios")
+                            respuesta = "no"
+                        }
+
+                        else -> {
+                            println("En mis tiempos esto no pasaba")
+                        }
+
+
+                    }
+
+
                 }
-                "Adulto" -> when(mensaje){
-                                    "¿como estas?" -> println("En la flor de la vida, pero me empieza a doler la espalda")
-                                    "grito" -> println( "No me levantes la voz mequetrefe")
-                                    "preguntaGrito" ->println("Estoy buscando la mejor solución")
-                                    "nombre"-> println("¿Necesitas algo?")
-                                    "adios" -> respuesta="no"
+                "Goblin"-> when (this.estadoVital) {
+                    //Respuestas a los distintos mensajes (mensajes controlados en fun comprobarMensaje)
+                    "Adolescente" -> when (mensaje) {
+                        "¿como estas?" -> println("De lujo")
+                        "grito" -> println("Eh relajate")
+                        "preguntaGrito" -> println("Tranqui se lo que hago")
+                        "nombre" -> println("¿Que pasa?")
+                        "adios" -> {
+                            println("Adios")
+                            respuesta = "no"
+                        }
 
-                                    else -> { println("No sé de qué me estás hablando") }
+                        else -> {
+                            println("Yo que se")
+                        }
+                    }
+
+                    "Adulto" -> when (mensaje) {
+                        "¿como estas?" -> println("En la flor de la vida, pero me empieza a doler la espalda")
+                        "grito" -> println("No me levantes la voz mequetrefe")
+                        "preguntaGrito" -> println("Estoy buscando la mejor solución")
+                        "nombre" -> println("¿Necesitas algo?")
+                        "adios" -> {
+                            println("Adios")
+                            respuesta = "no"
+                        }
+
+                        else -> {
+                            println("No sé de qué me estás hablando")
+                        }
 
 
-                                }
-                "Anciano" -> when(mensaje){
-                                    "¿como estas?" -> println("No me puedo mover")
-                                    "grito" -> println("Háblame más alto que no te escucho")
-                                    "preguntaGrito" ->println("Que no te escucho!")
-                                    "nombre"-> println("Las 5 de la tarde")
-                                    "adios" -> respuesta="no"
+                    }
 
-                                    else -> { println("En mis tiempos esto no pasaba") }
+                    "Anciano" -> when (mensaje) {
+                        "¿como estas?" -> println("No me puedo mover")
+                        "grito" -> println("Háblame más alto que no te escucho")
+                        "preguntaGrito" -> println("Que no te escucho!")
+                        "nombre" -> println("Las 5 de la tarde")
+                        "adios" -> {
+                            println("Adios")
+                            respuesta = "no"
+                        }
+
+                        else -> {
+                            println("En mis tiempos esto no pasaba")
+                        }
 
 
-                                }
+                    }
+
+
+                }
+                else-> {
+                    when (this.estadoVital) {
+                        //Respuestas a los distintos mensajes (mensajes controlados en fun comprobarMensaje)
+                        "Adolescente" -> when (mensaje) {
+                            "¿como estas?" -> println("De lujo")
+                            "grito" -> println("Eh relajate")
+                            "preguntaGrito" -> println("Tranqui se lo que hago")
+                            "nombre" -> println("¿Que pasa?")
+                            "adios" -> {
+                                println("Adios")
+                                respuesta = "no"
+                            }
+
+                            else -> {
+                                println("Yo que se")
+                            }
+                        }
+
+                        "Adulto" -> when (mensaje) {
+                            "¿como estas?" -> println("En la flor de la vida, pero me empieza a doler la espalda")
+                            "grito" -> println("No me levantes la voz mequetrefe")
+                            "preguntaGrito" -> println("Estoy buscando la mejor solución")
+                            "nombre" -> println("¿Necesitas algo?")
+                            "adios" -> {
+                                println("Adios")
+                                respuesta = "no"
+                            }
+
+                            else -> {
+                                println("No sé de qué me estás hablando")
+                            }
+
+
+                        }
+
+                        "Anciano" -> when (mensaje) {
+                            "¿como estas?" -> println("No me puedo mover")
+                            "grito" -> println("Háblame más alto que no te escucho")
+                            "preguntaGrito" -> println("Que no te escucho!")
+                            "nombre" -> println("Las 5 de la tarde")
+                            "adios" -> {
+                                println("Adios")
+                                respuesta = "no"
+                            }
+
+                            else -> {
+                                println("En mis tiempos esto no pasaba")
+                            }
+
+
+                        }
+
+
+                    }
+                }
             }
 
         }
@@ -173,6 +348,21 @@ fun main() {
     println("Hora de hablar con ellos")
     println("¿Con quien quieres hablar?,dime su nombre:")
     respuestaN= readln()
+
+
+    personajes.forEach {
+        if(it.nombre.equals(respuestaN)){
+
+            println("Estas hablando con: " + it.nombre)
+            println("Acutalmente es un: " + it.estadoVital)
+            println("Pertenece a la raza: "+ it.raza)
+            println("Y es un: "+it.clase)
+            println()
+            it.comunicacion()
+
+        }
+
+    }
 
 
 
